@@ -6,7 +6,6 @@ export const initialState = {
   users: [],
 };
 
-// A slice for recipes with our three reducers
 const usersSlice = createSlice({
   name: 'users',
   initialState,
@@ -41,14 +40,10 @@ export function fetchUsers() {
     dispatch(getUsers());
 
     try {
-      const response = await fetch(
-        // 'https://www.themealdb.com/api/json/v1/1/search.php?s=',
-        'https://reqres.in/api/users?page=2',
-      );
+      const response = await fetch('https://reqres.in/api/users?page=2');
       const data = await response.json();
 
       dispatch(getUsersSuccess(data.data));
-      // Here, delve one layer deeper.
     } catch (error) {
       dispatch(getUsersFailure());
     }
